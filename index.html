@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SrAdvance | Proyectos & Juegos</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      position: relative;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    canvas#particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+    .glass-box {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+      padding: 30px;
+      width: 85%;
+      max-width: 800px;
+      margin: 20px;
+      text-align: left;
+      animation: slideIn 1s ease;
+    }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    h1 { font-size: 2.5rem; background: linear-gradient(90deg, #00d4ff, #0078ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 15px; text-align: center; }
+    h2 { font-size: 1.5rem; color: #ddd; margin-bottom: 10px; }
+    p { color: #ccc; font-size: 1rem; line-height: 1.6; }
+    .download-btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 25px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .download-btn:hover { background: rgba(255, 255, 255, 0.12); }
+    footer { text-align: center; padding: 30px 0; font-size: 0.9rem; color: #888; }
+    footer span { color: #00d4ff; font-weight: 500; }
+    @media (max-width: 600px) { .glass-box { padding: 20px; } h1 { font-size: 2rem; } }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="glass-box">
+    <h1>Bienvenido a AdvanceStudios™</h1>
+    <p>Bienvenido a la Pagina Oficial de AdvanceStudios, hecha para atraer a los apasionados por conocer nuevos proyectos que estan en Progreso o estan a punto de ser Publicados o Lanzados🚀</p>
+  </div>
+
+  <div class="glass-box">
+    <h2>Acerca de AdvanceStudios</h2>
+    <p>Como sabras... Opté por crear una pagina nueva para publicar mis nuevos proyectos que quizáz, tal vez te interesarían.<br><br>
+      Mi Primer proyecto como tal fue hecho en Godot, pero con el avance de mucho que he visto en tutoriales, enseñanzas de cada persona que me ha dado, he aprendido hasta el dia de hoy a crear obras maestras (no tan maestas como pensarias), pero a seguir mi pasion como Creador de Juegos que es lo que mas me ha apasionado a estar haciendo a dia de hoy.<br><br>
+      Aquí encontrarás todos mis desarrollos personales desde Juegos: RPG, Fisica, Rol, Estrategia, Terror, etc.<br><br>Cada proyecto representa un paso en mi evolución como Creador, asi sea cualquier cosa de lo que tenga imaginado en Crear.
+    </p>
+  </div>
+
+  <div class="glass-box">
+    <h2>Mis Juegos & Proyectos</h2>
+    <p>Selecciona un proyecto para ver más información o descargarlo.</p>
+
+    <!-- 🔽 Coloca tus enlaces de descarga o redirección aquí -->
+    <a href="https://discord.gg/4pPKFgWsZD" class="download-btn" target="_blank" rel="noopener noreferrer">Proyecto 1</a>
+    <a href="https://tuenlace.com/juego2" class="download-btn" target="_blank" rel="noopener noreferrer">Proyecto 2</a>
+    <a href="https://tuenlace.com/juego3" class="download-btn" target="_blank" rel="noopener noreferrer">Proyecto 3</a>
+  </div>
+  
+  <div class="glass-box">
+    <h2>Mis Redes</h2>
+    <p>Selecciona un enlace para ver mas Detalles</p>
+
+    <a herf="#" class="download-btn" target="_blank" rel="noopener noreferrer">Discord</a>
+    <a herf="#" class="download-btn" target="_blank" rel="noopener noreferrer">Youtube</a>
+    <a herf="#" class="download-btn" target="_blank" rel="noopener noreferrer">Contacto</a>
+  </div>
+  <footer>
+    © <span>AdvanceStudios™</span> — All Rights Reserved - Todos los Derechos Reservados.
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 2 + 1, dx: (Math.random() - 0.5) * 0.3, dy: (Math.random() - 0.5) * 0.3 });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.dx; p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
